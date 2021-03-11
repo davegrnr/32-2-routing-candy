@@ -9,7 +9,7 @@ router.get('/', function (req, res) {
 
 router.post('/', function (req, res, next) {
     try {
-        if (!req.body.name || !req.body.price) throw new ExpressError("Item name and pirce required!", 400);
+        if (!req.body.name || !req.body.price) throw new ExpressError("Item name and price required!", 400);
         const newItem = { 
             name: req.body.name,
             price: req.body.price 
@@ -44,8 +44,8 @@ router.patch("/:name", function (req, res) {
 })
 
 router.delete("/:name", function(req, res){
-    const foundItem = items.find(item => item.name = req.params.name)
-    if (foundItem === undefined){
+    const foundItem = items.findIndex(item => item.name === req.params.name)
+    if (foundItem === -1){
         throw new ExpressError("Item not found", 404)
     }
     items.splice(foundItem, 1)
